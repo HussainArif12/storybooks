@@ -1,6 +1,6 @@
 const express= require('express');
 const router = express.Router();
-
+const passport = require('passport')
 //@desc Login/Landing page
 //@page GET /
 

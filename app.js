@@ -8,7 +8,7 @@ const session = require('express-session')
 const connectDB = require('./config/db');
 
 //load config 
-dotenv.config({path: './confiq/config.env'});
+dotenv.config();
 require('./config/passport')(passport);
 connectDB();
 
@@ -16,6 +16,8 @@ const app = express();
 
 if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
+    dotenv.config({path: './confiq/config.env'});
+
 }
 //handlebars
 app.engine('.hbs', exphbs({defaultLayout: 'main' , 'extname' : '.hbs'}));
@@ -37,7 +39,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname,'public')));
 //routes
 app.use('/',require('./routes/index.js'));
-
+app.use('/auth', require('./routes/auth'));
 const PORT = process.env.PORT ||  3000;
 
 app.listen(PORT, console.log(`SERVER Running in ${process.env.NODE_ENV} mode on ${PORT}`));
