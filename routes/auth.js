@@ -8,7 +8,7 @@ router.get('/google' , passport.authenticate('google', {scope: ['profile']}));
 
 
 //GET to dashboard
-router.get('/auth/google/callback' , passport.authenticate('google',{ failureRedirect: '/auth/google/failure'}),
+router.get('/auth/google/callback' , passport.authenticate('google',{ failureRedirect: '/'}),
 (req,res)=>{
     res.redirect('/dashboard')
 })
