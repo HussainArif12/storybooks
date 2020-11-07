@@ -1,4 +1,3 @@
-const { request } = require("express")
 
 module.exports = {
     ensureAuth : function(req,res,next) {
@@ -9,7 +8,7 @@ module.exports = {
         }
     },
     ensureGuest : function(req,res,next) {
-        if(req,isAuthenticated()) {
+        if(req.isAuthenticated()) {
             res.redirect('/dashboard')
         } else {
             return next()
