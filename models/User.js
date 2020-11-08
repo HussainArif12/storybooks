@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
    googleId : {
        type : String,
-       required: true
+       required: true 
    } ,
    displayName : {
     type : String,
@@ -29,4 +29,4 @@ createdAt:{
 }    
 })
 
-module.exports = mongoose.model("User",UserSchema );
+module.exports = mongoose.model("User",UserSchema ); 
