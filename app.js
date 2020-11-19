@@ -17,16 +17,25 @@ connectDB();
 
 const app = express();
 
+app.use(morgan('dev'));
 //body parser
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 if(process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
     dotenv.config({path: './confiq/config.env'});
 
 }
+
+//handlebar helpers
+const {formatDate, stripTags, truncate, editIcon} = require('./helpers/hbs');
+
 //handlebars
-app.engine('.hbs', exphbs({defaultLayout: 'main' , 'extname' : '.hbs'}));
+app.engine('.hbs', exphbs({helpers:{
+    formatDate,
+    stripTags,
+    truncate,
+    editIcon
+},defaultLayout: 'main' , 'extname' : '.hbs'}));
 app.set('view engine', '.hbs');
 
 //session middleware
@@ -41,6 +50,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//set global variable in express
+app.use(function(req,res,next) {
+    res.locals.user = req.user || null;
+    next();
+})
 
 //static folder
 app.use(express.static(path.join(__dirname,'public')));
