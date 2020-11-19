@@ -12,10 +12,11 @@
     {{{body}}}
     </div>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
     <script>
         M.Sidenav.init(document.querySelector('.sidenav'));
         M.FormSelect.init(document.querySelector('#status'));
-     
-        </script>
+        CKEDITOR.replace('body');
+    </script>
 </body>
 </html>
